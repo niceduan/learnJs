@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function moveon(){
+        var answer = confirm("are you ready");
+        if(answer){
+            window.location="http://cn.bing.com"
+        }
+    }
+    //setTimeout(moveon,1000);
+
+//        var o={x:5,y:8,z:9};
+//        var a = {};
+//        i=0;
+//        for(a[i++] in o );/*empty*/
+//        for (var b in a)
+//        {
+//            console.log(b);//0 1 2
+//            console.log(a[b]);//x y z
+//            console.log(o[a[b]]);//
+//        }
+//        Object.create(Object.prototype)//new Object()/{}
+    function inherit(p)
+    {
+        if(p==null) throw TypeError();
+        if(Object.create){
+            return Object.create(p);
+        }
+        var t = typeof p;
+        if(t!=="object" && t!=="function") throw TypeError();
+        function f(){};
+        f.prototype = p;
+        return new f();
+    }
+    var p={
+        x:1.0,
+        y:1.0,
+        get r(){
+            return Math.sqrt(this.x*this.x+this.y*this.y);
+        },
+        set r(newvalue){
+            var oldvalue = Math.sqrt(this.x*this.x+this.y*this.y);
+            var ratio = newvalue/oldvalue;
+            this.x*=ratio;
+            this.y*=ratio;
+        },
+        get theta(){
+            return Math.atan2(this.y,this.x);
+        }
+    }
+
+
+
+    var q = inherit(p);
+    q.x = 1,q.y =1;
+    console.log(q.r);
+    console.log(q.theta);
+    Object.defineProperty(q,"x",{value:1,
+    writable:true,enumerable:false,configurable:true})
+    o.x;
+    Object.keys(o);//=>[]
+    Object.defineProperty(o,"x",{writable:false});
+    var a = o.isExtensible();
+    Object.preventExtensions(o);
+    Object.isSealed(o);
+    Object.isFrozen(o);
+    a.toLocaleString();
+
+
+
+
+
+
+
+
+</script>
+</html>

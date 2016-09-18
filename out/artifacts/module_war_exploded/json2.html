@@ -1,0 +1,75 @@
+<html ng-app="myApp">
+<head>
+    <script src= "lib/angular.js"> </script>
+    <script src= "lib/angular-route.min.js"> </script>
+    <script scr= "js/editJson.js" > </script>
+</head>
+<body>
+<div ng-controller="menuCtrl" class="box">
+    <div ng-if="value" ng-include="'value.html'"></div>
+</div>
+
+<script type="text/ng-template" id="value.html">
+    <span ng-switch="type(value)">
+				<span ng-switch-when="string">
+					<!--<input type="text" ng-model="groupValue[key]"/>-->
+                    {{value}}
+				</span>
+				<span ng-switch-when="url">
+					<a href="value">{{value}}</a>
+				</span>
+				<span ng-switch-when="boolean">
+					{{boolean}}
+				</span>
+				<span ng-switch-when="number">
+					<!--<input type="number" ng-model="groupValue[key]"/>-->
+					{{value}}
+				</span>
+				<span ng-switch-when="null">
+					<strong>null</strong>
+				</span>
+				<span ng-switch-when="undefined">
+					<strong>undefined</strong>
+				</span>
+				<span ng-switch-when="array">
+					<!--[-->
+
+					<div ng-repeat="(key, value) in value track by $index" class="box"
+                         ng-init="groupValue = $parent.value" >
+						<!--<input type="checkbox" ng-model="checkArr" ng-init="checkArr=true" ng-if="checkArr">-->
+						<span  ng-include="'value.html'"></span>
+					</div>
+                    <!--]-->
+				</span>
+				<div ng-switch-when="hash">
+					<!--{-->
+
+					<div ng-repeat="(key, value) in value" class="box" ng-init="groupValue = $parent.value">
+						{{key}}: <input type="button" ng-model="checkObj" ng-init="checkObj=true" onclick="helloa()">
+						<ul ng-if="checkObj" ng-include="'value.html'"></ul>
+					</div>
+                    <!--}-->
+				</div>
+				<div ng-switch-when="config" ng-controller="confController">
+
+					<table>
+						<thead>
+						<tr><td ng-repeat="t in thead">{{t}}</td></tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="value1 in data">
+							<td ng-repeat="(key2,value2) in value1">{{value2}}</td>
+						</tr>
+						</tbody>
+					</table>
+
+
+				</div>
+
+			</span>
+
+</script>
+
+</body>
+
+</html>

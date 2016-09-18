@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Clock</title>
+    <script>
+        function loadasync(url) {
+            var head = document.getElementsByTagName("head")[0];
+            var s = document.createElement("script");
+            s.src = url;
+            head.appendChild(s);
+        }
+        function displayTime(){
+            var elt = document.getElementById("clock");
+            var now = new Date();
+            elt.innerHTML = now.toLocaleTimeString();
+            setTimeout(displayTime,1000);//1秒后执行;
+        }
+        window.onload = displayTime;
+        function factorial(n) {
+            if(n<=1) return n;
+            else return n*factorial(n-1)
+        }
+        document.write("<table>");
+        document.write("<tr><th>n</th><th>n!</th></tr>");
+        for(var i =1;i<=10;i++)
+        {
+            document.write("<tr><td>" + i + "</td><td>" + factorial(i) + "</td></tr>");
+        }
+        document.write("<table>");
+        document.write("Generate at "+new Date());
+
+
+
+    </script>
+    <style>
+        #clock {
+            font:bold 24pt sans;/*粗体大号字体*/
+            background: #ddf;/*定义蓝灰色背景*/
+            padding: 10px;/*周围一圈空白*/
+            border:solid black 2px;/*定义纯黑边框*/
+            border-radius:10px; /*定义圆角*/
+        }
+    </style>
+
+</head>
+<body>
+<h1>Digital Clock</h1>
+<div>
+    <span id = "clock"></span>
+</div>
+
+<!--javascript:URL 可以使用在任何可以使用常规url的地方
+比如<a>标记的href属性，<form>的action属性，甚至window.open()方法的参数
+-->
+<br>
+<a style="padding-top: 20px" href="javascript:new Date().toLocaleTimeString()">
+    What time Is it ?
+</a>
+<br>
+<a href="javascript:alert(new Date().toLocaleTimeString());">
+    检查时间而不必覆盖整个文档</a>
+<br>
+<!--打开一个新的窗口-->
+<a href="javascript:void window.open('about:blank')">打开一个窗口</a>
+<div>
+    <a href='javascript:
+    var e ="",r="";/*需要计算的表达式和结果*/
+    do{
+    e = prompt("Exprssion:"+e+"\n"+r+"\n",e);
+    try{r = "Result:"+eval(e);}
+    catch (ex)
+    {r = ex;}
+    }while(e);
+    void 0;
+'>
+        javascript evaluator
+    </a>
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

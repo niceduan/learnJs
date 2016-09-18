@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    function nothing() {
+        var a1 = [,];
+        var a2 = [undefined];
+        var p = 0
+        for (var a in a1)
+            p++
+        console.log(0 in a1);
+        p = 0;
+        for (var b in a2) {
+            p++;
+        }
+
+        console.log(0 in a2);
+        //console.log(o in a2);
+        Object.defineProperty(a1, "length", {writable: false})
+        //delete不影响数组长度
+        for (var i = 0, len = a1.length; i < len; i++) {
+            if (![a1[i]]) continue;
+            if (a1[i] === undefined) continue;
+            if (!(i in a1)) continue;
+        }
+        //for in 循环会枚举继承属性
+        for (var i in a1) {
+            if (!a.hasOwnProperty(i)) continue;
+        }
+        a1.forEach(function (x) {
+            p = x * x;
+        })
+        a1.join("--");
+        var s = "";
+        s.slice()
+    }
+    var a = [1, 2, 3];
+    var b = a.concat(4, 5);
+    console.log(a)
+    console.log(b)
+    function findall(a, x) {
+        var results = [], len = a.length, pos = 0;
+        while (pos < len) {
+            pos = a.indexOf(x, pos);
+            if (pos === -1) break;
+            results.push(pos);
+            pos++;
+        }
+        return results;
+    }
+    var isArray = Function.isArray || function (o) {
+                return typeof o === "object" &&
+                        Object.prototype.toString.call(o) == "[object Array]";
+                //toString方法被重写了
+            };
+    function isArrayLike(o) {
+        if (o &&
+                typeof o === "object" &&
+                isFinite(o.length) &&
+                o.length >= 0 &&
+                o.length === Math.floor(o.length) &&
+                o.length < 4294967296
+        )
+            return true;
+        else return false;
+    }
+    Array.join = Array.join || function (a, sep) {
+                return Array.prototype.join.call(a, sep);
+            };
+    Array.slice = Array.slice || function (a, from, to) {
+                return Array.prototype.slice.call(a.from, to);
+            };
+    Array.map = Array.map || function (a, f, thisArg) {
+                return Array.prototype.map.call(a, f, thisArg);
+            };
+            //push(),sort(),reverse(),splice()会修改数组
+    var tensquared = (function(x){return x*x;}(10));
+
+
+</script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="interApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="interController">
+<div>
+    <div id="emailEditor">
+        <input ng-model="to"
+               type="email"
+               placeholder="Recipient"/>
+        <textarea ng-model="emailBody"></textarea>
+    </div>
+    <div id="emailPreview">
+        <pre>__ previewText __</pre>
+    </div>
+</div>
+<div>
+    <table>
+        <tbody ng-repeat = "(key,value) in testArr">
+        <th ng-repeat= "t in aaa"> {{t}}</th>
+
+        <tr ng-repeat="(key1,value1) in value">
+
+            <td ng-repeat ="(key2,value2) in value1">
+                <dl ng-repeat = "(key3,value3) in value2">
+                    {{value3}}
+                    </dl>
+            </td>
+        </tr>
+        <!--<tr ng-repeat="t2 in test.right">
+            <td ng-repeat="tt in t2">{{tt}}</td>
+        </tr>-->
+
+
+        </tbody>
+    </table>
+    <hr>
+    <table>
+        <tr ng-repeat="test in tests">
+            <td >{{test}}</td>
+        </tr>
+    </table>
+
+</div>
+<hr>
+<div>
+   <table>
+       <tr><td>left</td><td>right</td></tr>
+       <tr ng-repeat="(key,value) in qq">
+           <td>{{key}}</td>
+           <td>
+           <table>
+               <tr><td ng-repeat="(key1,value1) in value">{{value1}}</td></tr>
+           </table>
+           </td>
+       </tr>
+   </table>
+
+</div>
+
+</body>
+<script src="lib/angular.js"></script>
+<script src="js/interpolate.js"></script>
+<script src="lib/angular-route.min.js"></script>
+</html>

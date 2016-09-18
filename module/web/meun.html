@@ -1,0 +1,35 @@
+<md-input-container ng-repeat="scenarios in menu" style="padding: 0 8px;">
+    <md-menu-bar class="leftField">
+        <md-menu>
+            <button ng-click="$mdOpenMenu()">
+                {{ scenarios.result || '选择场景' }}
+            </button>
+            <md-menu-content width="3">
+                <md-menu-item ng-repeat="(key1,scenario) in scenarios " class="md-indent"><!--ff one Obj-->
+                    <md-menu >
+                        <md-button ng-click="$mdOpenMenu()">
+                            {{scenario.name}}<!--混合场景-->
+                        </md-button>
+                        <md-menu-content width="3" >
+                            <md-menu-item ng-repeat="(key2,profile) in scenario._profiles"><!--fff 是[{}]-->
+                                <md-menu >
+                                    <md-button  ng-click="$mdOpenMenu()">
+                                        {{profile.name}}<!--混合场景测试-->
+                                    </md-button>
+                                    <md-menu-content  ng-model="lastItem">
+                                        <md-menu-item ng-repeat="(key3,rule) in profile._rules"
+                                                      type="radio"
+                                                      ng-click="set(scenarios,scenario,profile,rule)"
+                                                      value="rule.code"><!--fff 是[{}]-->
+                                            {{rule.name}}
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-menu-bar>
+</md-input-container>
