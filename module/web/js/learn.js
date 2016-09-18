@@ -83,7 +83,73 @@ for(x in range(0,10)){
 }
 // let h = (f(x) for(x in g));
 
+function invoke(f,start,interval,end){
+    if(!start) start = 0;
+    if(arguments.length<=2)
+        setTimeout(f,start);
+    else {
+        setTimeout(repeat,start);
+        function repeat() {
+            var h =setInterval(f,interval);
+            if(end) setTimeout(function () {
+                clearInterval(h);
+            },end);
+        }
+    }
+}
+/*
+* 浏览器定位和导航
+* */
+window.location === document.location//总是返回true
+/*
+* 提取
+* */
+function urlArgs() {
+    var args = {};
+    var query = location.search.substring(1);//查找到查询串并去掉？
+    var paris = query.split("&");
+    for(var i=0;i<paris.length;i++) {
+        var pos = paris[i].indexOf("=");
+        if(pos==-1) continue;
+        var name = paris[i].substring(0, pos);
+        var value = paris[i].substring(pos+1);
+        value = decodeURIComponent(value);//传说中的解码
+        arg[name] = value;//存储为属性的高超技巧
+    }
+    return args;//函数的话总是需要返回
+}
 
+/*
+* 载入新的文档
+* replace 载入文档之前会把历史中的文档删除
+* */
+//如果浏览器不支持XMLHttpRequest对象
+// 则将其重定向到一个不需要Ajax的静态页面
+if(!XMLHttpRequest) location.replace("staticPage.html");
+//还可以把URL赋值给location，他们会对URL进行解析
+location = "page2.html";
+location = "#top"//无id为top时则到顶部
+location.search = "?page="+(pageNum+1);//改变url导致载入新文档，hash值的话当前文档中跳转？？？
+/*
+* 浏览历史
+* */
+history.go(-2);
+history.back();
+history.forward();
+navigator.onLine;
+window.screen;
+
+do{
+    var name = prompt("what is your name?");
+    var corret = confirm("your name "+name +".\n"+
+    "Click Okay to proceed or cancel to re-enter.");
+}while (!corret)
+alert("Hello,"+name);//输出一个纯文本信息
+//对话框产生阻塞confirm 和 prompt
+
+var p = showModalDialog("mutiprompt.html",[
+    "Enter 3D point coordinates","x","y","z"],
+    "dialogwidth:400;dialogheight:300;resizable:yes");
 
 
 
