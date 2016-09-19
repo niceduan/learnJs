@@ -229,16 +229,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aaa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aaa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -911,12 +901,12 @@
       <workItem from="1474179385730" duration="1887000" />
       <workItem from="1474187979865" duration="2765000" />
       <workItem from="1474249808167" duration="1299000" />
-      <workItem from="1474254989775" duration="1530000" />
+      <workItem from="1474254989775" duration="1770000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="260089000" />
+    <option name="totallyTimeSpent" value="260329000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="936" y="0" width="984" height="1040" extended-state="0" />
