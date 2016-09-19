@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-app="wat">
+    <div ng-controller="OuterCtrl">
+        <div ng-controller="InnerCtrl">
+            <button increaseb>increase b</button>
+            <span ng-bind="b"></span>
+        </div>
+        <button increasea>increase a</button>
+        <span ng-bind="a"></span>
+    </div>
+</div>
+
+</body>
+
+<script src="../lib/angular.js"></script>
+<!--<script src="lib/angular.min.js"></script>-->
+<script src="../lib/angular-route.min.js"></script>
+<script src="../js/watch.js"></script>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+
+</head>
+<body>
+
+
+<div ng-controller="clockController">
+    <h4>The simplest adding machine ever</h4>
+    <button ng-click="add(1)" class="button">ADD</button>
+    <a ng-click="subtract(1)" class="button alert">Subtract</a>
+    <h4>Current count:{{counter}}</h4>
+</div>
+<div ng-controller="clockController">
+    <h1>{{clock}}</h1>
+
+</div>
+<div ng-controller="parentController">
+    <div ng-controller="childController">
+        <a ng-click = "sayHello()">SayHello</a>
+        {{person}}
+    </div>
+</div>
+<div ng-controller="MyController">
+    <input ng-model="expr"
+           type="text"
+           placeholder = "Enter an exprssion"/>
+    <h2>{{parseValue}}</h2>
+
+    <input ng-model="to"
+           type="email"
+           placeholder = "Recipient"/>
+    <textarea ng-model="emailBody"></textarea>
+    <pre>{{previewText}}</pre>
+
+</div>
+</body>
+<script src="lib/angular.js"></script>
+<script src="js/test.js"></script>
+<!--<script src="lib/angular.min.js"></script>-->
+<script src="lib/angular-route.min.js"></script>
+
+</html>
