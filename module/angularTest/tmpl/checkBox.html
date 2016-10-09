@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../lib/angular.js"></script>
+<body>
+<div ng-app="myApp">
+    <form>
+        Check to show header:
+        <input type="checkBox" ng-model="myVal">
+    </form>
+    <h1 ng-show="myVal">My Header</h1>
+    <form>
+        Pick to topic:
+        <input type="radio" ng-model="radioVal" value="dogs">Dogs
+        <input type="radio" ng-model="radioVal" value="tuts">Tutorials
+        <input type="radio" ng-model="radioVal" value="cars">Cars
+    </form>
+    <div ng-switch="radioVal">
+        <div ng-switch-when="dogs">
+            <h1>Dogs</h1>
+            <p>Welcome to world of dogs.</p>
+        </div>
+        <div ng-switch-when="tuts">
+            <h1>Tutorials</h1>
+            <p>Learn from example</p>
+        </div>
+        <div ng-switch-when="cars">
+            <h1>Cars</h1>
+            <p>Read about cars</p>
+        </div>
+    </div>
+    <form name="myForm">
+        <input name="myInput" ng-model="myInput" required>
+    </form>
+    <p>The input's valid state is :</p>
+    <h1>{{myForm.myInput.$valid}}</h1>
+</div>
+
+</body>
+<script>
+    var app = angular.module('myApp',[]);
+    app.directive('myDirective',function () {
+        return {
+            required:'ngModel',
+            link:function (scope,element,attr,mCtrl) {
+                function myValidation(value) {
+                    if(value.indexOf("e")>-1){
+                        mCtrl.$setValidity('charE', true);
+                    }else {
+                        mCtrl.$setValidity('charE', false);
+                    }
+                    return value;
+                }
+                mCtrl.$parsers.push(myValidation);
+            }
+        }
+    })
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+

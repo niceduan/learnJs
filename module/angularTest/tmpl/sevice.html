@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Service</title>
+</head>
+<body>
+<div ng-controller="ServiceController">
+    <label>Type in a GitHub username</label>
+    <input type="text" ng-model="username"
+    placeholder="Enter your GitHub username">
+    <ul>
+        <li ng-repeat="event in events">
+            {{event.actor.login}}{{event.repo.name}}
+
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>

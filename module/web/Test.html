@@ -3,6 +3,7 @@
 <head>
 
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.js"></script>
 <body>
 
 
@@ -33,6 +34,13 @@
            placeholder = "Recipient"/>
     <textarea ng-model="emailBody"></textarea>
     <pre>{{previewText}}</pre>
+
+    {{myText}}
+    <hr>
+    <div>
+        <p ng-bind-html="myText"></p>
+
+    </div>
 
 </div>
 </body>

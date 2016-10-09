@@ -444,6 +444,142 @@ $("p").click(function () {
 /*
 * 返回false等同于调用Event的preventDefault（） 和 stopPropagation（）
 * */
+$("a").bind('mouseenter mouseleave', f);
+$('a').hover(f,g)
+$("a").bind({mouseenter: f, mouseleave: g});
+//注销事件处理程序
+/*
+* unbind()不会注销通过onclick元素定义的处理程序，也不会注销addEventListener或者
+* attachEvent方法注册的事件处理程序
+* 不带参数时unbind会注销jQuery对象中所有元素的所有事件处理程序
+* */
+$('*').unbind();//从所有元素中移除jQuery事件处理程序
+$('a').unbind("mouseover mouseout");
+$('a').unbind("click.ns1.ns2");
+$('a').unbind("mouseover.myMod mouseout.myMod");
+$('a').unbind(".myMod");
+
+$("#mybutton").unbind('click', myClickListener);//注销特定事件类型的指定处理函数
+$("a").unbind({
+    mouseover:mouseoverHandler,
+    mouseout:mouseoutHandler
+});
+
+$("#my_form").submit();//就和用户单击提交按钮一样 依然冒泡，以及触发祖先节点的处理事件
+$("#my_form").trigger("submit");
+
+$("button").trigger("click.ns1");
+$("button").trigger("click!");
+//button1的单击事件处理程序触发button2上的相同事件
+$("button1").click(function (e) {
+    $('#button2').trigger(e);
+});
+//触发事件，添加额外的属性给事件对象
+$("button1").trigger({type: 'click', synthetic: true});
+//该程序处理检测额外的属性来区分是真实事件还是虚假事件
+$("button1").click(function (e) {
+    if(e.synthetic){//do something
+        }
+});
+//给触发程序传递参数
+$("#button1").trigger("click", true);
+$("#button1").trigger("click", [x,y,z]);
+
+$(document).delegate('a', 'mouseover', linkHandler);
+//静态链接的静态事件处理程序
+$("a").bind("mouseover", linkHandler);
+//文档中的动态更新部分采用实时处理程序
+$(".dynamic").delegate("a", "mouseover", linkHandler);
+
+$("a").live("mouseover", linkHandler);
+$("a", $(".dynamic")).live("mouseover", linkHandler);
+
+$("a").die('mouseover');
+$("a").die('mouseover','linkHandler');
+
+$(document).undelegate('a');
+$(document).undelegate('a','mouseover');
+$(document).undelegate('a','mouseover',linkHandler);
+
+$(".stopmoving").click(function () {
+    jQuery.fx.off = true;
+});
+$("#message").fadeIn({
+    duration:"fast",
+    complete:function () {
+        $(this).text("Hello World");
+    }
+});
+
+$("#sprite").animate({
+    opacity:.25,
+    fontSize:10
+},{
+    duration:500,
+    complete:function () {
+        this.text("Goodbye");
+    }
+});
+$("p").animate({
+    "margin-left": "+=.5in",
+    opacity: "-=.1"
+});
+$("img").fadeIn(500)
+    .animate({"width": "+=100"}, {queue: false, duration: 1000})
+    .fadeOut(500);
+$("img").animate({"width": "+=100"}, {duration: 500, easing: "iinear"});
+$("img").animate({"width": "+=100"}, { 500, "iinear"});
+
+$("img").bind({
+    mouseover:function () {
+        $(this).stop().fadeTo(300, 1.0);
+    },
+    mouseout:function () {
+        $(this).stop().fadeTo(300, 0.5);
+    }
+});
+$("img").fadeTo(100,0.5).delay(200).slideUp();
+setInterval(function () {
+    $("#status").load("status_report.html");
+}, 6000);
+//加载并显示天气预告的温度部分
+$("#temp").load("whether_report.html #temperature");
+$("#temp").load("whether_report.html","zipcode=02134");
+$("#temp").load("whether_report.html",{zipcode:0o21314,units:'F'});
+
+jQuery.get("debug.txt", alert);
+jQuery.ajax({
+    type:"GET",
+    url:url,
+    data:null,
+    dataType:"script",
+    success:callback
+
+});
+$("#loading_animation").bind({
+    ajaxStart:function () {
+        $(this).show();
+    },
+    ajaxStop:function () {
+        $(this).hide();
+    }
+});
+/*
+* jQuery.each()遍历属性且包括继承的属性
+* */
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
