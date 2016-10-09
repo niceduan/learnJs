@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<style>
+    .content{
+        background-color: #1b6d85;
+    }
+</style>
+<head>
+    <script src="../lib/angular.js"></script>
+    <script src="../js/directiveTest.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="directiveCtrl">
+<!--<div>
+    {{myData}}
+    <my-directive>opop</my-directive>
+    <br>
+    <div google-directive some-attr="http://bing.com"
+    my-link-text="Click me To Google">
+
+    </div>
+    <input type="text" ng-model="myUrl"/>
+
+    <div google-directive some-attr="{{myUrl}}"
+    my-link-text="Click me to anywhere">
+    </div>
+</div>-->
+<label>Their URL field:</label>
+<input type="text" ng-model="theirUrl"/>
+<div google-directive some-attr="theirUrl" my-link-text="Click me to Google ha..">
+
+</div>
+<input type="text" ng-model="someProperty" placeholder="TypetoEnable"/>
+<button ng-model="button" ng-disabled="!someProperty">AButton</button>
+<textarea ng-disabled="isDisabled">Wait%second</textarea>
+<br>
+Type Here to make sibling readonly:
+<input type="text" ng-model="someProperty"><br>
+<input type="text" ng-readonly="someProperty" value="Some text here">
+<br>
+<input type="text" ng-model="person.name" placeholder="person">
+<div ng-switch on="person.name">
+    <p ng-switch-default>And the winner is </p>
+    <p ng-switch-when="Ari">{{person.name}}</p>
+</div>
+<hr>
+<div sidebox title="Links">
+    <ul>
+        <li>First link</li>
+        <li>Second Link</li>
+    </ul>
+</div>
+<div >
+    <ul>
+        <li>First link</li>
+        <li>Second Link</li>
+    </ul>
+</div>
+
+</body>
+</html>

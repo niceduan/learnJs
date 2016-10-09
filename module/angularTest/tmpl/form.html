@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+    <script src="../lib/angular.js"></script>
+</head>
+<body>
+<div style="width: 400px">
+    <form novalidate name="signup_form" ng-submit="submit()">
+        <div class="row">
+            <div class="large-12 column">
+                <label>Name</label>
+                <input type="text" placeholder="enter your name"
+                       name="name"
+                       ng-model="signup.name" ng-maxlength="20"
+                       ng-minlength="3" required
+                ensure-unique={{signup.name}}>
+                <div class="error" ng-show="signup_form.name.$dirty
+                &&signup_form.name.$invalid&&signup_form.submitted">
+                    <small class="error" ng-show="signup_form.name.$error.required">
+                        Your name is required
+                    </small>
+                    <small class="error" ng-show="signup_form.name.$error.unique">
+                        That username is taken, please try another
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+        <button type="submit" ng-disabled="signup_form.$invalid" class="button radius">Submit</button>
+
+    </form>
+
+
+</div>
+
+</body>
+<script>
+    angular.module('myApp', [])
+            .directive("ensureUnique",['$http',function ($http) {
+                return {
+                    require:'ngModel',
+                    link:function (scope,ele,attrs,c) {
+                        scope.$watch(attrs.ngModel,function () {
+                            $http({
+                                method:'POST',
+                                url:'getData.json',
+                                data:{'filed':attrs.ensureUnique}
+                            }).success(function (data) {
+                                c.$setValidity('unique',data.isUnique)
+                            }).error(function () {
+                                c.$setValidity('unique',false)
+                            });
+                        })
+                    }
+
+                }
+            }
+
+
+            ])
+</script>
+</html>

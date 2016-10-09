@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body bgcolor="#EBEEF7">
+<script src="js/jquery.min.js"></script>
+<script src="js/daily.js"></script>
+
+<p>If you click on me, I will disappear.</p>
+<p>Click me away!</p>
+<p>Click me too!</p>
+
+
+
+
+<div id="backDIV" style="DISPLAY: none;FILTER: Alpha(Opacity='20');BACKGROUND-COLOR:black; margin:0px; width:1800px; height:1000px;padding-left:400px; padding-top:200px;" >
+    <img src="./images/checksave.gif" border="0" />
+</div>
+<div id="showDIV">
+    <form method="post" action="/timesheet/modifySheet.do" name="modifyByPersonForm">
+
+        <input type="hidden" name="empNum" value="E00010737726" />
+
+
+        <input type="hidden" name="departmentId" value="PA011_S000033923" />
+
+
+        <input type="hidden" name="beginDate" value="2016-09-28" />
+
+
+        <input type="hidden" name="endDate" value="2016-09-30" />
+
+
+        <table border="0" width="100%" id="table1" cellspacing="0"
+               cellpadding="0">
+
+            <tr>
+                <td><input type="hidden" id="isEditTimeSheet" name="isEditTimeSheet" value='Y'></td>
+                <td height="14">
+                    <table border="0" width="100%" id="table2" cellspacing="0"
+                           cellpadding="0">
+                        <tr>
+                            <b>修改个人日报（保存时将删除勾选的日报），已确认日报需要确认人退回后才能修改。</b><br><br>
+                        </tr>
+                        <tr>
+                            <td><font color=black><B>服务工时</B></font></td>
+                            <td>
+                                <input type="hidden" id="projsNum" name="projsNum">
+                                <input type="hidden" id="persNum" name="persNum">
+                                <input type="hidden" id="dailysNum" name="dailysNum">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table id="serviceTable" width="100%" border="0" cellpadding="0" cellspacing="0" class="table_111">
+                                    <tr>
+                                        <td align="center" width="5%" class="td_1">删除</td>
+                                        <td align="center" width="6%" class="td_1">确认状态</td>
+                                        <td align="center" width="9%" class="td_1">日期</td>
+                                        <td align="center" width="15%" class="td_1">任务归属</td>
+                                        <td align="center" width="22%" class="td_1">服务目录</td>
+                                        <td align="center" width="10%" class="td_1">任务ID</td>
+                                        <td align="center" width="15%" class="td_1">任务/需求</td>
+                                        <td align="center" width="14%" class="td_1">详细说明</td>
+                                        <td align="center" width="5%" class="td_1">工时</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="9">
+                                            <table id="projs" width="100%" border="0" cellpadding="0" cellspacing="0" class="table_1111" >
+                                                <tr></tr>
+
+                                                <tr id='proj_0'>
+                                                    <td align="center" width="5%" class="td_31">删除
+                                                        <input type="checkbox" id="projectWorkTimes[0].selected" name="projectWorkTimes[0].selected" value="false"  onclick=deleteSheet(this,'0','project')  disabled ='true'>
+                                                        <input type="hidden" id="projectWorkTimes[0].serviceNo" name="projectWorkTimes[0].serviceNo" value="pcom009">
+                                                        <input type="hidden" id="projectWorkTimes[0].syncDate" name="projectWorkTimes[0].syncDate" value="">
+                                                        <input type="hidden" id="projectWorkTimes[0].statusT" name="projectWorkTimes[0].statusT" value="1">
+                                                    </td>
+                                                    <td align="center" width="6%" class="td_31">
+
+
+                                                        已确认
+
+
+                                                    </td>
+                                                    <td align="left" width="9%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[0].workDate" id="projectWorkTime[0].workDate" size="11" value="2016-09-28" onchange="checkDate('2016-08-31','projectWorkTime[0].workDate','2016-09-28');" readonly  disabled ='true' disabled ='true'>
+                                                        <!-- <img src="/timesheet/images/calen_pic.gif" id="edit_proj_date_trigger_0" style="cursor: pointer;"  border="0"  disabled ='true'> -->
+                                                    </td>
+                                                    <script type="text/javascript">
+                                                        Calendar.setup({
+                                                            inputField     :    "projectWorkTimes[0].workDate",
+                                                            ifFormat       :    "%Y-%m-%d",
+                                                            showsTime      :    false,
+                                                            button         :    "edit_proj_date_trigger_0",
+                                                            singleClick    :    true,
+                                                            step           :    1
+                                                        });
+                                                    </script>
+                                                    <td align="left" width="15%" class="td_311" valign="top">
+                                                        <select size="1" id="projectWorkTimes[0].projectId" name="projectWorkTimes[0].projectId" onChange="choosetask(0);" width="5" style=width:100%  disabled ='true'>
+                                                            <option value="-1">请选择</option>
+                                                            <option value="10949" selected>风控策略可视化平台</option>
+
+
+                                                            <option value="10944">移动App安全检测平台</option>
+
+
+
+
+                                                        </select>
+                                                    </td>
+                                                    <td align="left" width="22%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[0].serviceItems" id="projectWorkTimes[0].serviceItems" size="12" value="开发项目服务--&gt;开发和测试服务--&gt;编码实现和开发测试" width='5' style='width:100%;background:#eee;' onclick="chooseProjService(0);" disabled ='true'>
+                                                    </td>
+                                                    <td align="left" width="10%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[0].taskId" id="projectWorkTimes[0].taskId" size="15" value="520792" width='5' disabled ='true' style='width:100%;background:#eee;'>
+                                                        <div id="projectWorkTimes_projPercent_0"
+
+                                                             style="display: none"
+                                                        >
+                                                            <b>项目任务进度</b><br/>
+                                                            <input name="projectWorkTimes[0].projPercent" type="text" size='3' width='5' id="projectWorkTimes[0].projPercent" value="" style=width:85% MaxLength='40' class="text"  disabled ='true'>&nbsp;%
+                                                        </div>
+                                                    </td>
+                                                    <td align="left" width="15%" class="td_31" valign="top">
+                                                        <textarea rows="4" name="projectWorkTimes[0].taskDetail" id="projectWorkTimes[0].taskDetail" cols="19" style='width:100%;background:#eee;' width='5' disabled ='true'>[风控策略可视化平台]-开发</textarea>
+                                                    </td>
+                                                    <td align="left" width="14%" class="td_311" valign="top">
+                                                        <textarea rows="4" name="projectWorkTimes[0].remark" id="projectWorkTimes[0].remark" cols="19" width='5' style=width:100%  disabled ='true'></textarea>
+                                                    </td>
+                                                    <td align="left" width="5%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[0].costHours" id="projectWorkTimes[0].costHours" size="5" value="8.0" style=width:100% onChange='javascript:calSumTime();'  disabled ='true' onkeypress='onlyNum()'>
+                                                    </td>
+                                                </tr>
+                                                <script type="text/javascript">
+                                                    document.getElementById("projsNum").value=0;
+                                                </script>
+
+                                                <tr id='proj_1'>
+                                                    <td align="center" width="5%" class="td_31">删除
+                                                        <input type="checkbox" id="projectWorkTimes[1].selected" name="projectWorkTimes[1].selected" value="false"  onclick=deleteSheet(this,'1','project')  disabled ='true'>
+                                                        <input type="hidden" id="projectWorkTimes[1].serviceNo" name="projectWorkTimes[1].serviceNo" value="pcom009">
+                                                        <input type="hidden" id="projectWorkTimes[1].syncDate" name="projectWorkTimes[1].syncDate" value="">
+                                                        <input type="hidden" id="projectWorkTimes[1].statusT" name="projectWorkTimes[1].statusT" value="1">
+                                                    </td>
+                                                    <td align="center" width="6%" class="td_31">
+
+
+                                                        已确认
+
+
+                                                    </td>
+                                                    <td align="left" width="9%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[1].workDate" id="projectWorkTime[1].workDate" size="11" value="2016-09-29" onchange="checkDate('2016-08-31','projectWorkTime[1].workDate','2016-09-29');" readonly  disabled ='true' disabled ='true'>
+                                                        <!-- <img src="/timesheet/images/calen_pic.gif" id="edit_proj_date_trigger_1" style="cursor: pointer;"  border="0"  disabled ='true'> -->
+                                                    </td>
+                                                    <script type="text/javascript">
+                                                        Calendar.setup({
+                                                            inputField     :    "projectWorkTimes[1].workDate",
+                                                            ifFormat       :    "%Y-%m-%d",
+                                                            showsTime      :    false,
+                                                            button         :    "edit_proj_date_trigger_1",
+                                                            singleClick    :    true,
+                                                            step           :    1
+                                                        });
+                                                    </script>
+                                                    <td align="left" width="15%" class="td_311" valign="top">
+                                                        <select size="1" id="projectWorkTimes[1].projectId" name="projectWorkTimes[1].projectId" onChange="choosetask(1);" width="5" style=width:100%  disabled ='true'>
+                                                            <option value="-1">请选择</option>
+                                                            <option value="10949" selected>风控策略可视化平台</option>
+
+
+                                                            <option value="10944">移动App安全检测平台</option>
+
+
+
+
+                                                        </select>
+                                                    </td>
+                                                    <td align="left" width="22%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[1].serviceItems" id="projectWorkTimes[1].serviceItems" size="12" value="开发项目服务--&gt;开发和测试服务--&gt;编码实现和开发测试" width='5' style='width:100%;background:#eee;' onclick="chooseProjService(1);" disabled ='true'>
+                                                    </td>
+                                                    <td align="left" width="10%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[1].taskId" id="projectWorkTimes[1].taskId" size="15" value="520792" width='5' disabled ='true' style='width:100%;background:#eee;'>
+                                                        <div id="projectWorkTimes_projPercent_1"
+
+                                                             style="display: none"
+                                                        >
+                                                            <b>项目任务进度</b><br/>
+                                                            <input name="projectWorkTimes[1].projPercent" type="text" size='3' width='5' id="projectWorkTimes[1].projPercent" value="" style=width:85% MaxLength='40' class="text"  disabled ='true'>&nbsp;%
+                                                        </div>
+                                                    </td>
+                                                    <td align="left" width="15%" class="td_31" valign="top">
+                                                        <textarea rows="4" name="projectWorkTimes[1].taskDetail" id="projectWorkTimes[1].taskDetail" cols="19" style='width:100%;background:#eee;' width='5' disabled ='true'>[风控策略可视化平台]-开发</textarea>
+                                                    </td>
+                                                    <td align="left" width="14%" class="td_311" valign="top">
+                                                        <textarea rows="4" name="projectWorkTimes[1].remark" id="projectWorkTimes[1].remark" cols="19" width='5' style=width:100%  disabled ='true'></textarea>
+                                                    </td>
+                                                    <td align="left" width="5%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[1].costHours" id="projectWorkTimes[1].costHours" size="5" value="8.0" style=width:100% onChange='javascript:calSumTime();'  disabled ='true' onkeypress='onlyNum()'>
+                                                    </td>
+                                                </tr>
+                                                <script type="text/javascript">
+                                                    document.getElementById("projsNum").value=1;
+                                                </script>
+
+                                                <tr id='proj_2'>
+                                                    <td align="center" width="5%" class="td_31">删除
+                                                        <input type="checkbox" id="projectWorkTimes[2].selected" name="projectWorkTimes[2].selected" value="false"  onclick=deleteSheet(this,'2','project')  disabled ='true'>
+                                                        <input type="hidden" id="projectWorkTimes[2].serviceNo" name="projectWorkTimes[2].serviceNo" value="pcom009">
+                                                        <input type="hidden" id="projectWorkTimes[2].syncDate" name="projectWorkTimes[2].syncDate" value="">
+                                                        <input type="hidden" id="projectWorkTimes[2].statusT" name="projectWorkTimes[2].statusT" value="1">
+                                                    </td>
+                                                    <td align="center" width="6%" class="td_31">
+
+
+                                                        已确认
+
+
+                                                    </td>
+                                                    <td align="left" width="9%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[2].workDate" id="projectWorkTime[2].workDate" size="11" value="2016-09-30" onchange="checkDate('2016-08-31','projectWorkTime[2].workDate','2016-09-30');" readonly  disabled ='true' disabled ='true'>
+                                                        <!-- <img src="/timesheet/images/calen_pic.gif" id="edit_proj_date_trigger_2" style="cursor: pointer;"  border="0"  disabled ='true'> -->
+                                                    </td>
+                                                    <script type="text/javascript">
+                                                        Calendar.setup({
+                                                            inputField     :    "projectWorkTimes[2].workDate",
+                                                            ifFormat       :    "%Y-%m-%d",
+                                                            showsTime      :    false,
+                                                            button         :    "edit_proj_date_trigger_2",
+                                                            singleClick    :    true,
+                                                            step           :    1
+                                                        });
+                                                    </script>
+                                                    <td align="left" width="15%" class="td_311" valign="top">
+                                                        <select size="1" id="projectWorkTimes[2].projectId" name="projectWorkTimes[2].projectId" onChange="choosetask(2);" width="5" style=width:100%  disabled ='true'>
+                                                            <option value="-1">请选择</option>
+                                                            <option value="10949" selected>风控策略可视化平台</option>
+
+
+                                                            <option value="10944">移动App安全检测平台</option>
+
+
+
+
+                                                        </select>
+                                                    </td>
+                                                    <td align="left" width="22%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[2].serviceItems" id="projectWorkTimes[2].serviceItems" size="12" value="开发项目服务--&gt;开发和测试服务--&gt;编码实现和开发测试" width='5' style='width:100%;background:#eee;' onclick="chooseProjService(2);" disabled ='true'>
+                                                    </td>
+                                                    <td align="left" width="10%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[2].taskId" id="projectWorkTimes[2].taskId" size="15" value="520792" width='5' disabled ='true' style='width:100%;background:#eee;'>
+                                                        <div id="projectWorkTimes_projPercent_2"
+
+                                                             style="display: none"
+                                                        >
+                                                            <b>项目任务进度</b><br/>
+                                                            <input name="projectWorkTimes[2].projPercent" type="text" size='3' width='5' id="projectWorkTimes[2].projPercent" value="" style=width:85% MaxLength='40' class="text"  disabled ='true'>&nbsp;%
+                                                        </div>
+                                                    </td>
+                                                    <td align="left" width="15%" class="td_31" valign="top">
+                                                        <textarea rows="4" name="projectWorkTimes[2].taskDetail" id="projectWorkTimes[2].taskDetail" cols="19" style='width:100%;background:#eee;' width='5' disabled ='true'>[风控策略可视化平台]-开发</textarea>
+                                                    </td>
+                                                    <td align="left" width="14%" class="td_311" valign="top">
+                                                        <textarea rows="4" name="projectWorkTimes[2].remark" id="projectWorkTimes[2].remark" cols="19" width='5' style=width:100%  disabled ='true'></textarea>
+                                                    </td>
+                                                    <td align="left" width="5%" class="td_31" valign="top">
+                                                        <input type="text" name="projectWorkTimes[2].costHours" id="projectWorkTimes[2].costHours" size="5" value="8.0" style=width:100% onChange='javascript:calSumTime();'  disabled ='true' onkeypress='onlyNum()'>
+                                                    </td>
+                                                </tr>
+                                                <script type="text/javascript">
+                                                    document.getElementById("projsNum").value=2;
+                                                </script>
+
+                                                <tr></tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+
+
+                                    <tr>
+                                        <td colspan="9">
+                                            <table id="pers" width="100%" border="0" cellpadding="0" cellspacing="0" class="table_1111" >
+                                                <tr></tr>
+
+                                                <tr></tr>
+                                            </table>
+                                        </td></tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><font color=black><B>非服务工时</B></font></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" id="dailyTable" border="0" cellpadding='0' class="table_111" cellspacing=0>
+                                    <tr>
+                                        <td align="center" width="5%" class="td_1">删除</td>
+                                        <td align="center" width="6%" class="td_1">确认状态</td>
+                                        <td align="center" width="9%" class="td_1">日期</td>
+                                        <td align="center" width="15%" class="td_1">任务归属</td>
+                                        <td align="center" width="22%" class="td_1">任务类型</td>
+                                        <td align="center" width="25%" class="td_1"></td>
+                                        <td align="center" width="14%" class="td_1">详细说明</td>
+                                        <td align="center" width="5%" class="td_1">工时</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="8">
+                                            <table id="daily" width="100%" border="0" cellpadding="0" cellspacing="0" class="table_1111" >
+                                                <tr></tr>
+
+                                                <tr></tr>
+                                            </table>
+                                        </td></tr>
+
+
+                                    <tr>
+                                        <td align="center" height="20"></td>
+                                        <td height="20"></td>
+                                        <td height="20"></td>
+                                        <td height="20"></td>
+                                        <td height="20"></td>
+                                        <td height="20"></td>
+                                        <td height="20"></td>
+                                        <td height="20"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="td_3"></td>
+                                        <td class="td_3" align="right">工时合计：</td>
+                                        <td class="td_3" align="right">
+                                            <input type="text" name="edit_sum_time_label" id="edit_sum_time_label" value="0" size="6" style='width:100%'  disabled='true'>H</td>
+                                        <script type="text/javascript">
+                                            calSumTime();
+                                        </script>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="89%" id="table6">
+                                    <tr>
+                                        <td width="42%"></td>
+                                        <td width="46%">
+                                            <a href="javascript:submit_timesheet()" name="ok_link0">
+                                                <img src="/timesheet/images/button/button_save.gif" name="ok_button0" width="60" height="27" border="0" align="middle">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+</body>
+
+
+</td>
+</tr>
+</table>
+</body>
+
+</html>

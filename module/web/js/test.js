@@ -57,4 +57,5 @@ app.controller('MyController',
                     template($scope);
             }
         });
+        $scope.myText = "My name is: <h1>John Doe</h1>";
     });
