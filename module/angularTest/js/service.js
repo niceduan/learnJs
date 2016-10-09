@@ -57,7 +57,7 @@ angular.module('myApp').factory('myService',function () {
 });
 angular.module('myApp').constant('apiKey', '123123').value('apikey', '12');
 //常量可以注册到配置函数中，而值不行。通常情况下，可以通过value（）来注册
-//服务或者函数，用constant（）来配置数据.常量不能被装时器拦截
+//服务或者函数，用constant（）来配置数据.常量不能被装时器拦截0
 
 
 
