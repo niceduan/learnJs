@@ -207,56 +207,14 @@ var fatal = log.getElementsByClassName("fatal error");
 *
 * */
 //div ， #log 并集组合
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//querySelectorAll()出现了
+function parent(e,n) {
+    if(n===undefined) n=1;
+    while(n--&&e) e =e.parentNode;
+}
+/*
+* 集合
+* */
 
 
 function invoke(f,start,interval,end){
@@ -326,6 +284,80 @@ alert("Hello,"+name);//输出一个纯文本信息
 var p = showModalDialog("mutiprompt.html",[
     "Enter 3D point coordinates","x","y","z"],
     "dialogwidth:400;dialogheight:300;resizable:yes");
+
+var sparkLines = document.getElementsByClassName("sparkLine");
+for(var i = 0;i<sparkLines.length;i++){
+    var dataset = sparkLines[i].dataset;
+    var ymin = parseFloat(dataset.ymin);
+    var ymax = parseFloat(dataset.ymax);
+    var data = sparkLines[i].textContent.split(".").map(parseFloat);
+    drawSparkLine(sparkLines[i],ymin,ymax,data);
+
+}
+
+/*插入节点，接受两个参数*/
+n.parentNode.replaceChild(document.createTextNode("[REPLACED]"));
+
+var frag = document.createDocumentFragment();//特殊的Node，作为其他节点的一个临时容器
+
+//倒序排列节点
+function reverse (n) {
+    var frag = document.createDocumentFragment();
+    while (n.lastChild) frag.appendChild(n.lastChild);
+    n.appendChild(frag);
+}
+/*查询窗口滚动条的位置*/
+function getScrollOffsets(w){
+    w = w||window;
+    if(w.pageXOffset !=null) return {x: w.pageXOffset, y: w.pageYOffset};
+    var d = document;
+    if(document.compatMode == "CSS1Compat")
+        return {x:d.documentElement.scrollLeft,y:d.documentElement.scrollTop};
+    //怪异模式
+    return {x:d.body.scrollLeft,y:d.body.scrollTop};
+
+}
+
+/*查询窗口的视图尺寸*/
+function getViewSize(w) {
+    w=w||window;
+    if(w.innerWidth !=null) return {w:w.innerWidth,h:w,innerHeight};
+
+}
+
+var box = e._getBoundingClientRect();
+var offsets = getScrollOffsets();
+var x = box.left + offsets.x;
+var y = box.top + offsets.y;
+
+var fields = document.getElementById("address").getElementsByTagName("input");
+document.querySelectorAll('#shipping input[type="radio"]');
+document.querySelectorAll('#shipping input[type="radio"][name="method"]');
+
+
+/*查询选取的文本*/
+function getSelectedText() {
+    if(window.getSelection) {
+        return window.getSelection()
+    }else if(document.selection) {
+        return document.selection.createRange().text;
+    }
+}
+s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
