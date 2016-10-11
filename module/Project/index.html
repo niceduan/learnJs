@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="IsolatedApp">
+
+  <head>
+    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <script data-require="angular.js@1.3.0" data-semver="1.3.0" src="../angularTest/lib/angular.js"></script>
+    <script data-require="jquery@*" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <h1>Angular Isolated Scope</h1>
+    There are <strong>four</strong> ways to interact with isolated scope: via an attribute,
+    binding or expression.
+    <hr>
+    <div ng-controller="MyCtrl">
+      <div>
+        <p>{{mydata}} </p>
+        <!--//<input type="text" ng-model="mydata">-->
+        <div my-directive wodeshuxing="say(msgee)"></div>
+      </div>
+
+    </div>
+    <h2>With an Attribute</h2>
+    <div ng-controller="AttributeCtrl as ctrl">
+      <div class="well">
+        <p>Communicating with isolated scope via an attribute is uni-directional between parent and child.
+          Change the property in the parent input and watch it change the property in the child directive.
+          What happens when you change the property directly in the child directive?</p>
+        <input class="form-control" type="text" ng-model="ctrl.parentName">
+        <div attribute-box class="well directive" local-name="{{ctrl.parentName}}"></div>
+      </div>
+    </div>
+    <h2>With a One-way Binding</h2>
+    <div ng-controller="OneWayBindingCtrl as ctrl">
+      <div class="well">
+        <p>Communicating with isolated scope via a one-way binding is uni-directional from parent to child.
+          Change a property in the parent and watch it update in the child. Note that changing a property in the child also updates the parent,
+          but this is because of the object being passed by reference, not because Angular is updating the parent when the child values change.</p>
+        <input class="form-control" type="text" ng-model="ctrl.parentItem.name">
+        <input class="form-control" type="text" ng-model="ctrl.parentItem.description">
+        <div one-way-binding-box class="well directive" local-item="ctrl.parentItem"></div>
+      </div>
+    </div>
+    <h2>With a Two-way Binding</h2>
+    <div ng-controller="TwoWayBindingCtrl as ctrl">
+      <div class="well">
+        <p>Communicating with isolated scope via a two-way binding is bi-directional from parent to child.
+          Change a property in either child or parent and watch it update in the other.</p>
+        <input class="form-control" type="text" ng-model="ctrl.parentItem.name">
+        <input class="form-control" type="text" ng-model="ctrl.parentItem.description">
+        <div two-way-binding-box class="well directive" local-item="ctrl.parentItem"></div>
+      </div>
+    </div>
+    <h2>With an Expression</h2>
+    <div ng-controller="ExpressionCtrl as ctrl">
+      <div class="well">
+        <p>Communicating with isolated scope via an expression is uni-directional from child to parent.
+          Enter a property in the child directive and click <strong>Send</strong>.
+          Notice that the directive calls whatever parent method you defined on the element.</p>
+        <h4>{{ctrl.hello}}</h4>
+        <h4>{{ctrl.goodbye}}</h4>
+        <hr>
+        <h4>Directive One</h4>
+        <div expression-box class="well directive" local-expression="ctrl.sayHello(message)"></div>
+        <h4>Directive Two</h4>
+        <div expression-box class="well directive" local-expression="ctrl.sayGoodbye(message)"></div>
+
+      </div>
+    </div>
+  </body>
+
+</html>

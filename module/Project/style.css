@@ -1,0 +1,11 @@
+body {
+  padding: 10px;
+}
+.well input {
+  margin-bottom: 10px;
+}
+.directive {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  background-color: #ACF0F2;
+}
