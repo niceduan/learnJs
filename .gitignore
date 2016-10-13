@@ -28,8 +28,8 @@ nb-configuration.xml
 glassfish-web.xml
 
 #netbeans
-nb-configuration.xml
-glassfish-web.xml
+#nb-configuration.xml
+#glassfish-web.xml
 
 # angularjs
 node_modules
@@ -46,3 +46,5 @@ logs/
 
 # misc
 Thumbs.db
+java/
+/.idea/workspace.xml
