@@ -12,7 +12,7 @@ build/
 
 #intellij
 out/
-*.iml
+*.imls
 .idea
 .idea/workspace.xml
 
