@@ -410,7 +410,339 @@ Filed.prototype.getElement = function () {
 };
 Filed.prototype.getValue = function () {
     throw new Error('blabla');
+};
+var InputFiled = function (id, Label) {
+    Filed.call(this.id);
+    this.input = document.createElement('input');
+};
+extend(InputFiled, Filed);
+InputFiled.prototype.getValue=function () {
+    return this.input.value;
 }
+
+var contactForm = new CompositeForm('contact-form', 'POST', 'cantact.php');
+contactForm.add(new InputFiled('first-name', 'FirstName'));
+addEvent(window, 'unload', contactForm.save);
+
+var CompositeFiledset = function (id, legendText) {
+    this.component = {};
+    this.element = document.createElement('fieldset');
+    this.element.id = id;
+    if (legendText) {
+        this.legend = document.createElement('legend');
+        this.legend.appendChild(document.createTextNode(legendText));
+        this.element.appendChild(this.legend);
+    }
+
+};
+CompositeFiledset.prototype.add = function (child) {
+    Interface.ensureImplements(child, Composite, FormItem);
+    this.component[child.getElement().id] = child;
+    this.element.appendChild(child.getElement());
+};
+CompositeFiledset.prototype.remove = function () {
+    //remove
+};
+CompositeFiledset.prototype.getChild = function () {
+    //getChild
+};
+CompositeFiledset.prototype.save = function () {
+    //save
+};
+
+var nameFiledset = new CompositeFiledset('name-filedset');
+nameFiledset.add(new InputFiled('firstname', 'Firstname'));
+nameFiledset.add(new InputFiled('lastname', 'LastName'));
+contactForm.add(nameFiledset);
+
+/*门面模式*/
+var DED = window.DED || {};
+DED.util = {
+    stopPropagation: function (e) {
+        if (e.stopPropagation) {
+            //W3 interface
+            e.stopPropagation();
+        } else {
+            e.cancelBubble = true;
+        }
+
+    },
+    preventDefault: function (e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        } else {
+            e.returnValue = false;
+        }
+    },
+    stopEvent: function (e) {
+        DED.util.stopPropagation(e);
+        DED.util.preventDefault(e);
+
+    }
+};
+DED.util.Event = {
+    getEvent: function (e) {
+        return e || window.event;
+    },
+    getTarget:function (e) {
+        return e.target || srcElement;
+    },
+    stopPropagation:function (e) {
+        if(e.stopPropagation) e.stopPropagation();
+        else e.cancelBubble();
+
+    },
+    preventDefault:function (e) {
+        if(e.preventDefault) e.preventDefault();
+        else e.returnValue = false;
+    },
+    stopEevent:function (e) {
+        this.stopPropagation(e);
+        this.preventDefault(e);
+    }
+};
+
+var Acmbicycle = function () {
+
+};
+Acmbicycle.prototype = {
+    assemble: function () {
+
+    },
+    wash: function () {
+
+    },
+    ride: function () {
+
+    },
+    repair: function () {
+
+    },
+    getPrice: function () {
+
+    }
+};
+
+var BicycleDecorator = function (bicycle) {
+    Interface.ensureImplements(bicycle, Bicycle);
+    this.bicycle = bicycle;
+};
+BicycleDecorator.prototype = {
+    assemble: function () {
+        return this.bicycle.assemble();
+    },
+    wash: function () {
+        return this.bicycle.wash();
+    },
+    ride: function () {
+        return this.bicycle.ride();
+    },
+    repair: function () {
+        return this.bicycle.repair();
+    },
+    getPrice: function () {
+        return this.bicycle.getPrice();
+    }
+};
+var HeadlightDecorator = function (bicycle) {
+    HeadlightDecorator.superclass.constructor.call(this, bicycle)
+};
+extend(HeadlightDecorator, BicycleDecorator);
+HeadlightDecorator.prototype.assemble = function () {
+    return this.bicycle.assemble() + 'Attach headlight handlebars';
+};
+var myBicycle = new Acmbicycle();//a instance of bicycle
+alert(myBicycle.getPrice());
+myBicycle = new HeadlightDecorator(myBicycle);
+alert(myBicycle.getPrice());
+
+/*ToolTips*/
+var Tooltips = function (targetElement, text) {
+    this.target = targetElement;
+    this.text = text;
+    this.delayTimeout = null;
+    this.delay = 1500;
+    //create html
+    this.element = document.createElement('div');
+    this.element.style.display = 'none';
+    this.element.style.position = 'absolute';
+    this.element.className = 'tooltip';
+    document.getElementsByName('body')[0].appendChild(this.element);
+    this.element.innerHTML = this.text;
+    //attach events
+    var that = this;//Correcting the scope
+    addEvent(this.target,'mouseover',function (e) {
+        this.startDelay();
+    });
+    addEvent(this.target,'mouseout',function (e) {
+        that.hide();
+    });
+    Tooltips.prototype = {
+        startDelay:function (e) {
+            var that = this;
+            var x = e.clientX;
+            var y = e.clientY;
+            this.delayTimeout = setTimeout(function () {
+                that.show(x, y);
+            }, this.delay);
+        },
+        show:function (x,y) {
+            clearTimeout(this.delayTimeout);
+            this.delayTimeout = null;
+            this.element.style.display = 'none';
+        },
+        hide:function () {
+            clearTimeout(this.delayTimeout);
+            this.delayTimeout = null;
+            this.element.style.display = 'none';
+        }
+    }
+
+};
+var Tooltip = function () {
+    this.delayTimeout = null;
+    this.delay = 1500;
+    //create html
+    this.element = document.createElement('div');
+    this.element.style.display = 'none';
+    this.element.style.position = 'absolute';
+    this.element.className = 'tooltip';
+    document.getElementsByTagName('body')[0].appendChild(this.element);
+};
+Tooltip.prototype = {
+    startDelay: function (e, text) {
+        if (this.delayTimeout == null) {
+            var that = this;
+            var x = e.clientX;
+            var y = e.clientY;
+            this.delayTimeout = setTimeout(function () {
+                taht.show(x, y, text);
+            }, this.delay)
+        }
+    },
+    show: function (x, y, text) {
+        clearTimeout(this.delayTimeout);
+        this.delayTimeout = null;
+        this.element.innerHTML = text;
+        this.element.style.left = x + 'px';
+        this.element.style.top = (y + 20) + 'px';
+        this.element.style.display = 'block';
+
+    },
+    hide:function () {
+        clearTimeout(this.delayTimeout);
+        this.delayTimeout = null;
+        this.element.style.display = 'none';
+    }
+};
+
+var TooltipManager = (function () {
+    var storeInstance = null;
+    var Tooltip = function () {
+        //...
+    };
+    Tooltip.prototype = {
+        //...
+    };
+    return {
+        addTooltip: function (targetElement, text) {
+            //get the tooltip object
+            var tt = this.getTooltip();
+            //attach event
+            addEvent(targetElement, 'mouseover', function (e) {
+                tt.startDelay(e.text);
+            });
+            addEvent(targetElement, 'mouseout', function (e) {
+                tt.hide();
+            });
+        },
+        getTooltip: function () {
+            if (storeInstance == null) {
+                storeInstance = new Tooltip();
+            }
+            return storeInstance;
+        }
+
+    };
+});
+TooltipManager.addTooltip($('link-id'), 'Lomsdf..');
+var DisplayModule = new Interface('DisplayModule', ['show', 'hide', 'state']);
+var DialogBox = function () {
+    //implements DisplayModule
+};
+DialogBox.prototype = {
+    show: function (header, body, footer) {
+        //set the content and show the dialog box
+    },
+    hide: function () {
+        //Hide the box
+    },
+    state: function () {
+        //return the visible or hidden
+    }
+};
+var DialogManager = (function () {
+    var created = [];
+    return {
+        displayDialogBox: function (header, body, footer) {
+            var inUse = this.numberInUse();
+            if (inUse > created.length) {
+                created.push(this.createDialogBox());
+            }
+            cerated[inUse].show(header, body.footer)
+        },
+        createDialogBox: function () {
+            var db = new DialogBox();
+            return db;
+        },
+        numberInUse: function () {
+            var inUse = 0;
+            created.forEach(function (e) {
+                if (e.state() === 'visible')
+                    inUse++;
+            })
+            return inUse;
+        }
+
+    }
+}());
+/*观察者*/
+function Publisher() {
+    this.subscribers = [];
+}
+Publisher.prototype.deliver = function () {
+
+};
+Function.prototype.subscribe = function (publisher) {
+    //exist?
+    return this ;
+}
+var Animation =function (o) {
+    this.onStart = new Publisher;
+    this.onComplete = new Publisher;
+    this.onTween = new Publisher;
+};
+Animation.method('fly',function () {
+    //fly this
+    this.onStart.deliver();
+    this.onComplete.deliver();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

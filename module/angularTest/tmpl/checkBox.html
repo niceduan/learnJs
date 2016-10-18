@@ -37,6 +37,8 @@
     </form>
     <p>The input's valid state is :</p>
     <h1>{{myForm.myInput.$valid}}</h1>
+    <a ng-controller="MyController">hah</a>
+    <h2>{{dataNeed}}</h2>
 </div>
 
 </body>
@@ -58,6 +60,17 @@
             }
         }
     })
+    app.controller("MyController", function ($scope) {
+        $scope.dataNeed = "hshsh";
+            
+
+        for (var i = 0; i < 5; i++) {
+            (function (i) {
+                console.log(i);
+            }(i))
+        }
+    });
+            
 
 </script>
 </html>
